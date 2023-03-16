@@ -122,3 +122,49 @@ ansible-playbook copy_file.yml --check
 vi install_httpd.yml
 history
 vi install_httpd.yml
+l
+ls
+git log
+git show 2294cba38
+git remote add origin https://github.com/afrid0315/ansibleplaybooks-.git
+git branch -M main
+git push origin main
+exit
+ls
+vi install_httpd.yml
+vi install_httpd_handler.yml
+ansible-playbooks install_httpd_handler.yml
+ansible-playbook install_httpd_handler.yml
+vi install_httpd_handler.yml
+ansible-playbook install_httpd_handler.yml
+ls
+vi uninstall_httpd.yml
+ansible-playbook uninstall_httpd.yml
+ansible-playbook install_httpd_handler.yml
+vi install_httpd_handler.yml
+ansible-playbook install_httpd_handler.yml
+vi install_httpd_handler.yml
+ansible-playbook install_httpd_handler.yml
+rm -rf install_httpd_handler.yml
+ls
+vi install_httpd_handler.yml
+ansible-playbook install_httpd_handler.yml
+which git
+ansible all -m command -a "which git" -b
+git init
+git config --global user.name "afrid"
+git config --global user.email "afridaffu4@gmail.com
+git config --global user.email "afridaffu4@gmail.com"
+mkdir setup
+ls
+mv *. index.html setup
+mv *.yml index.html setup
+ls
+cd /setup
+ls
+sudo cd /setup
+cd setup
+ls
+cd ..
+git add .
+git commit -m "first commit"
