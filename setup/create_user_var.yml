@@ -1,0 +1,10 @@
+---
+- name: Creating a user
+  hosts: all
+  become: true
+  vars:
+    user: ashu
+  tasks:
+  -  name: Create user {{user}}
+     user:
+       name: "{{user}}"

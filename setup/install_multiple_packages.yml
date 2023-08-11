@@ -1,0 +1,10 @@
+---
+- name: This playbook is used to install multiple packages
+  hosts: all
+  become: true
+  tasks:
+  - name: Installing multiple packages
+    yum:
+      name: ['git', 'tree', 'docker']
+      state: present
+

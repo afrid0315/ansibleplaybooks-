@@ -1,0 +1,10 @@
+---
+- name: This playbook is used to uninstall multiple packages
+  hosts: all
+  become: true
+  tasks:
+  - name: Uninstalling multiple packages
+    yum:
+      name: ['git', 'tree', 'docker']
+      state: absent
+
