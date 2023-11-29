@@ -1,0 +1,26 @@
+# Kodekloud Ansible Archive Module Problem - level 2
+# Creating an archive games.tar.gz file of /usr/src/sysops/ directory of app servers and 
+# copy it to /opt/sysops/ directory on all app servers.
+#  The user and group owner of archive games.tar.gz should be tony for App Server 1, steve for App Server 2 and banner for App Server 3.
+
+
+# playbook.yml
+---
+- name: Archive and copy data
+  hosts: all
+  become: true
+  tasks:
+  - name: Create achive
+    archive:
+      path: /usr/src/sysops/
+      dest: /opt/sysops/games.tar.gz
+      format: gz
+      force_archive: true
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+
+
+# inventory
+stapp01 ansible_host=172.16.238.10 ansible_ssh_pass=Ir0nM@n ansible_user=tony
+stapp02 ansible_host=172.16.238.11 ansible_ssh_pass=Am3ric@ ansible_user=steve
+stapp03 ansible_host=172.16.238.12 ansible_ssh_pass=BigGr33n ansible_user=banner
