@@ -1,0 +1,32 @@
+# Kodekloud Ansible Blockinfile Module Problem - level 2
+# Install httpd in all app servers and 
+# start service on all app servers and add blockinfile module with given content and permissions should be 0755.
+#  The user and group owner of that index.html file should be apache for App Server 1, App Server 2, App Server 3.
+# playbook
+
+---
+- name: install httpd and start service
+  hosts: all
+  become: true
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: present
+      
+  - name: start service
+    service:
+      name: httpd
+      state: started
+      
+  - name: add block module
+    blockinfile:
+      path: /var/www/html/index.html
+      create: yes
+      block: |
+        Welcome to XfusionCorp!
+        This is Nautilus sample file, created using Ansible!
+        Please do not modify this file manually!
+      owner: apache
+      group: apache
+      mode: "0755"
