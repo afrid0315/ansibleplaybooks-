@@ -1,1 +1,6 @@
-
+#We have a file /opt/security/blog.txt on app server 1. 
+#Using Ansible replace module replace string xFusionCorp to Nautilus in that file.
+#We have a file /opt/security/story.txt on app server 2. 
+#Using Ansiblereplace module replace the string Nautilus to KodeKloud in that file.
+#We have a file /opt/security/media.txt on app server 3. 
+#Using Ansible replace module replace string KodeKloud to xFusionCorp Industries in that file.
