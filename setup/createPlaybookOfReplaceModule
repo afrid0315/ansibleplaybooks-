@@ -1,6 +1,34 @@
-#We have a file /opt/security/blog.txt on app server 1. 
-#Using Ansible replace module replace string xFusionCorp to Nautilus in that file.
-#We have a file /opt/security/story.txt on app server 2. 
-#Using Ansiblereplace module replace the string Nautilus to KodeKloud in that file.
-#We have a file /opt/security/media.txt on app server 3. 
-#Using Ansible replace module replace string KodeKloud to xFusionCorp Industries in that file.
+# kodekloud ansible replace module problem.
+# We have a file /opt/security/blog.txt on app server 1. 
+# Using Ansible replace module replace string xFusionCorp to Nautilus in that file.
+# We have a file /opt/security/story.txt on app server 2. 
+# Using Ansiblereplace module replace the string Nautilus to KodeKloud in that file.
+# We have a file /opt/security/media.txt on app server 3. 
+# Using Ansible replace module replace string KodeKloud to xFusionCorp Industries in that file.
+
+# For replacing any string in files, we can use write playbook in this way
+---
+- name: Update Data on App Servers
+  hosts: app_servers
+  become: true
+  tasks:
+    - name: Replace string in /opt/security/blog.txt on app server 1
+      replace:
+        path: /opt/security/blog.txt
+        regexp: 'xFusionCorp'
+        replace: 'Nautilus'
+      when: inventory_hostname=="stapp01"
+
+    - name: Replace string in /opt/security/story.txt on app server 2
+      replace:
+        path: /opt/security/story.txt
+        regexp: 'Nautilus'
+        replace: 'KodeKloud'
+      when: inventory_hostname=="stapp2"
+
+    - name: Replace string in /opt/security/media.txt on app server 3
+      replace:
+        path: /opt/security/media.txt
+        regexp: 'KodeKloud'
+        replace: 'xFusionCorp Industries'
+      when: inventory_hostname=="stapp03"
