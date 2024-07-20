@@ -1,0 +1,53 @@
+#Create a playbook index.yml under /home/thor/playbooks directory on jump host. Using blockinfile Ansible module create a file facts.txt under /root directory on all app servers and add the following given block in it. You will need to enable facts gathering for this task.
+
+# Ansible managed node architecture is <architecture>
+
+
+
+# (You can obtain the system architecture from Ansible's gathered facts by using the correct Ansible variable while taking into account Jinja2 syntax)
+
+
+# Install httpd server on all apps. After that make a copy of facts.txt file as index.html under /var/www/html directory. Make sure to start httpd service after that.
+
+# Note: Do not create a separate role for this task, just add all of the changes in index.yml playbook.
+
+
+
+
+
+---
+- name: create a file
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: create facts.txt file
+      file:
+        path: /root/facts.txt
+        state: touch
+
+    - name: use blockinfile module to insert text
+      blockinfile:
+        name: facts.txt
+        path: /root/facts.txt
+        state: present
+        mode: 777
+        owner: root
+        block: |
+          Ansible managed node architecture is <architecture>
+
+    - name: httpd install
+      yum:
+        name: httpd
+        state: installed
+
+    - name: copy txt to html
+      copy:
+        src: /root/facts.txt
+        dest: /var/www/html
+        remote_src: yes
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
